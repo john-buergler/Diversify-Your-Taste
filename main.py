@@ -189,8 +189,8 @@ if __name__ == '__main__':
                 'valence', 'tempo']
 
     """
-    user_track_features = get_top_song_features('1d6352ee10744e4ab561e5e8939638a6',
-                                                '50f712646de1466089ad0e087e78d1ba',
+    user_track_features = get_top_song_features([ID],
+                                                [SECRET],
                                                 'http://localhost:8080/callback')
 
     scaler = MinMaxScaler()
@@ -206,8 +206,8 @@ if __name__ == '__main__':
     norm_tracks[1].to_csv(Path('UserData/med.csv'))
     norm_tracks[2].to_csv(Path('UserData/long.csv'))
 
-    user_tracks = user_saved_tracks('1d6352ee10744e4ab561e5e8939638a6',
-                                    '50f712646de1466089ad0e087e78d1ba',
+    user_tracks = user_saved_tracks([ID],
+                                                [SECRET],,
                                     'http://localhost:8080/callback')
 
     user_tracks_dict = {'id': user_tracks}
@@ -215,8 +215,8 @@ if __name__ == '__main__':
     pd.DataFrame(user_tracks_dict).to_csv('UserData/user_tracks.csv')
     """
 
-    client_cred_manager = SpotifyClientCredentials(client_id='1d6352ee10744e4ab561e5e8939638a6',
-                                                   client_secret='50f712646de1466089ad0e087e78d1ba')
+    client_cred_manager = SpotifyClientCredentials(client_id='[ID]',
+                                                   client_secret='[SECRET]')
 
     sp = spotipy.Spotify(client_credentials_manager=client_cred_manager)
 
@@ -235,8 +235,8 @@ if __name__ == '__main__':
     print(tracks)
 
     # genres = get_subgenres('UserData/user_tracks.csv',
-    #                        '1d6352ee10744e4ab561e5e8939638a6',
-    #                        '50f712646de1466089ad0e087e78d1ba')
+    #                        [ID],
+    #                        [SECRET])
     #
     # with open('UserData/genre_count.json', 'w') as outfile:
     #     json.dump(genres, outfile)
