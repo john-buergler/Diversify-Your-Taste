@@ -2,18 +2,22 @@ from BuildData import buildUser, genre
 from Model import cosSimAVGModel
 
 if __name__ == '__main__':
-    buildUser.get_top_song_features('1d6352ee10744e4ab561e5e8939638a6',
-                                    'ef24ee95968f45db88c25e8116efe83f',
+    cli_id = 'ID'
+
+    cli_secret = 'Secret'
+
+    buildUser.get_top_song_features(cli_id,
+                                    cli_secret,
                                     'http://localhost:8080/callback')
 
-    buildUser.user_saved_tracks('1d6352ee10744e4ab561e5e8939638a6',
-                                'ef24ee95968f45db88c25e8116efe83f',
+    buildUser.user_saved_tracks(cli_id,
+                                cli_secret,
                                 'http://localhost:8080/callback')
 
     genre.get_subgenres('UserData/user_tracks.csv',
-                        '1d6352ee10744e4ab561e5e8939638a6',
-                        'ef24ee95968f45db88c25e8116efe83f')
+                        cli_id,
+                        cli_secret)
 
     cosSimAVGModel.cos_sim_top_40('SpotifyFeatures.csv',
-                                  '1d6352ee10744e4ab561e5e8939638a6',
-                                  'ef24ee95968f45db88c25e8116efe83f')
+                                  cli_id,
+                                  cli_secret)
