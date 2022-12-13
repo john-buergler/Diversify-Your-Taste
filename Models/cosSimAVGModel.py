@@ -5,10 +5,11 @@ from numpy.linalg import norm
 import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
 from spotipy import SpotifyClientCredentials
+from Models import helpers
 
 
 def cos_sim_top_40(csv, client_id, client_secret):
-    csv_data = pd.read_csv(csv)
+    csv_data = csv
     """
     s_bool = csv_data.loc[:, 'country'] == 'US'
 
@@ -34,18 +35,9 @@ def cos_sim_top_40(csv, client_id, client_secret):
     for idx, id in enumerate(ids):
         vector_dict[id] = temp_data[idx]
 
-    v_short = pd.read_csv('UserData/short.csv')[features].mean().values
-    v_med = pd.read_csv('UserData/med.csv')[features].mean().values
-    v_long = pd.read_csv('UserData/long.csv')[features].mean().values
-
-    v_long_to_short = np.subtract(v_short, v_long)
-    v_med_to_short = np.subtract(v_short, v_med)
-
-    v_weighted_change = np.add(v_long_to_short, v_med_to_short) / 2
-
-    projected_v = np.add(v_short, v_weighted_change)
-
     cos_sim_score = []
+
+    projected_v = helpers.build_top_vector(tempo=True)
 
     for id in vector_dict:
         track = vector_dict[id]
@@ -62,8 +54,7 @@ def cos_sim_top_40(csv, client_id, client_secret):
 
     audio_feat = audio_feat.sort_values(by=['cos_sim_score'], ascending=False)
 
-    s_bool = audio_feat.loc[:, 'genre'] == 'Alternative'
-    top40 = audio_feat.loc[s_bool, :].head(n=40)
+    top40 = audio_feat.head(n=40)
 
     tracks = []
 
