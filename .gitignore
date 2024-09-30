@@ -2,3 +2,4 @@ UserData
 main.py
 api_ref.py
 .cache
+.gitignore
