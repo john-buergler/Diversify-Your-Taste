@@ -1,5 +1,5 @@
 from BuildData import buildUser
-import secrets
+from api_ref import CLIENT_ID, CLIENT_SECRET, REDIRECT_URI
 
 if __name__ == '__main__':
-    buildUser.get_top_song_features('short_term', secrets.CLIENT_ID, secrets.CLIENT_SECRET, secrets.REDIRECT_URI)
+    buildUser.get_top_song_features('short_term', CLIENT_ID, CLIENT_SECRET, REDIRECT_URI)
